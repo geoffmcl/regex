@@ -14,5 +14,6 @@ libregex.a
 re-test
 .vs/*
 *.VC.db
+install_manifest.txt
 
 
