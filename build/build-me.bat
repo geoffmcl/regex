@@ -1,7 +1,7 @@
 @setlocal
 @set VCVERS=14
 @set TMPDRV=X:
-@set DOINST=0
+@set DOINST=1
 @set TMPPRJ=regex
 @set TMPLOG=bldlog-1.txt
 @set BUILD_RELDBG=0
@@ -59,7 +59,8 @@
 @echo Building %TMPPRJ% 64-bits... all ouput to %TMPLOG%
 
 @REM A 64-bit build of regex
-@set INSTALL_DIR=%TMPDRV%\install\msvc140-64\%TMPPRJ%
+@set INSTALL_DIR=%TMPINST%
+@REM set INSTALL_DIR=%TMPDRV%\install\msvc140-64\%TMPPRJ%
 @REM set SIMGEAR_DIR=%TMPDRV%\install\msvc140-64\SimGear
 @REM set OSG_DIR=%TMPDRV%\install\msvc140-64\OpenSceneGraph
 @REM set BOOST_ROOT=C:\local\boost_1_62_0
