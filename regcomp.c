@@ -56,9 +56,16 @@ static int freezeset(register struct parse *p, register cset *cs);
 static int firstch(register struct parse *p, register cset *cs);
 static int nch(register struct parse *p, register cset *cs);
 static void mcadd(register struct parse *p, register cset *cs, register char *cp);
-static void mcsub(register cset *cs, register char *cp);
-static int mcin(register cset *cs, register char *cp);
-static char *mcfind(register cset *cs, register char *cp);
+
+/* Prevent warning: ‘mcsub’  defined but not used [-Wunused-function] */
+/* static void mcsub(register cset *cs, register char *cp);           */
+
+/* Prevent warning: ‘mcin’   defined but not used [-Wunused-function] */
+/*static int mcin(register cset *cs, register char *cp);              */
+
+/* Prevent warning: ‘mcfind’ defined but not used [-Wunused-function] */
+/* static char *mcfind(register cset *cs, register char *cp);         */
+
 static void mcinvert(register struct parse *p, register cset *cs);
 static void mccase(register struct parse *p, register cset *cs);
 static int isinsets(register struct re_guts *g, int c);
@@ -92,7 +99,11 @@ static char nuls[10];		/* place to point scanner in event of error */
 #define	NEXTn(n)	(p->next += (n))
 #define	GETNEXT()	(*p->next++)
 #define	SETERROR(e)	seterr(p, (e))
-#define	REQUIRE(co, e)	((co) || SETERROR(e))
+
+/* Prevent warning: value computed is not used [-Wunused-value] */
+/* #define	REQUIRE(co, e)	((co) || SETERROR(e)) */
+#define REQUIRE(co, e)  { if (!(co)) SETERROR(e); }
+
 #define	MUSTSEE(c, e)	(REQUIRE(MORE() && PEEK() == (c), e))
 #define	MUSTEAT(c, e)	(REQUIRE(MORE() && GETNEXT() == (c), e))
 #define	MUSTNOTSEE(c, e)	(REQUIRE(!MORE() || PEEK() != (c), e))
@@ -248,6 +259,7 @@ int stop;			/* character this ERE should end at */
 
 	for (;;) {
 		/* do a bunch of concatenated expressions */
+
 		conc = HERE();
 		while (MORE() && (c = PEEK()) != '|' && c != stop)
 			p_ere_exp(p);
@@ -1218,10 +1230,16 @@ register char *cp;
 	cs->multis[cs->smultis - 1] = '\0';
 }
 
+
+
 /*
  - mcsub - subtract a collating element from a cset
  == static void mcsub(register cset *cs, register char *cp);
  */
+
+/* ========================================================= */
+/* Prevent warning: defined but not used [-Wunused-function] */
+/*
 static void
 mcsub(cs, cp)
 register cset *cs;
@@ -1244,23 +1262,36 @@ register char *cp;
 	cs->multis = realloc(cs->multis, cs->smultis);
 	assert(cs->multis != NULL);
 }
+   ========================================================= */
+
+
 
 /*
  - mcin - is a collating element in a cset?
  == static int mcin(register cset *cs, register char *cp);
  */
+
+/* ========================================================= */
+/* Prevent warning: defined but not used [-Wunused-function] */
+/*
 static int
 mcin(cs, cp)
 register cset *cs;
 register char *cp;
-{
 	return(mcfind(cs, cp) != NULL);
 }
+   ========================================================= */
+
+
 
 /*
  - mcfind - find a collating element in a cset
  == static char *mcfind(register cset *cs, register char *cp);
  */
+ 
+/* ========================================================= */
+/* Prevent warning: defined but not used [-Wunused-function] */
+/*
 static char *
 mcfind(cs, cp)
 register cset *cs;
@@ -1275,6 +1306,9 @@ register char *cp;
 			return(p);
 	return(NULL);
 }
+   ========================================================= */
+
+
 
 /*
  - mcinvert - invert the list of collating elements in a cset
