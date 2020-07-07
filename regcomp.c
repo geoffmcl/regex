@@ -100,10 +100,12 @@ static char nuls[10];		/* place to point scanner in event of error */
 #define	GETNEXT()	(*p->next++)
 #define	SETERROR(e)	seterr(p, (e))
 
-/* Prevent warning: value computed is not used [-Wunused-value] */
-/* #define	REQUIRE(co, e)	((co) || SETERROR(e)) */
+#ifdef _MSC_VER
+#define	REQUIRE(co, e)	((co) || SETERROR(e))
+#else // !#ifdef _MSC_VER
+ /* gcc - Prevent warning: value computed is not used [-Wunused-value] */
 #define REQUIRE(co, e)  { if (!(co)) SETERROR(e); }
-
+#endif // #ifdef _MSC_VER y/n
 #define	MUSTSEE(c, e)	(REQUIRE(MORE() && PEEK() == (c), e))
 #define	MUSTEAT(c, e)	(REQUIRE(MORE() && GETNEXT() == (c), e))
 #define	MUSTNOTSEE(c, e)	(REQUIRE(!MORE() || PEEK() != (c), e))
