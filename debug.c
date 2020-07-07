@@ -241,11 +241,11 @@ static char *			/* -> representation */
 regchar(ch)
 int ch;
 {
-	static char buf[10];
+	static char buf[16]; /* passed an 'int' requires 1 to 11 bytes octal storage */
 
 	if (isprint(ch) || ch == ' ')
 		sprintf(buf, "%c", ch);
 	else
-		sprintf(buf, "\\%o", ch);
+		sprintf(buf, "\\%o", (char)(ch & 0xff));
 	return(buf);
 }
