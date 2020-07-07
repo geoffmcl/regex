@@ -10,6 +10,8 @@
 #include "regex.h"
 #ifdef _MSC_VER // local getopt source
 #include "getopt\getopt.h"
+#else			// Posix getopt definitions
+#include <unistd.h>
 #endif
 
 /* #include "main.ih" // why generate this? */
@@ -40,7 +42,7 @@ extern void regprint();
 /*
  - main - do the simple case, hand off to regress() for regression
  */
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char *argv[];
 {

@@ -221,7 +221,11 @@ FILE *d;
 			fprintf(d, ">");
 			break;
 		default:
-			fprintf(d, "!%d(%d)!", OP(*s), opnd);
+			/* Prevent warning:
+			   format ‘%d’ expects type ‘int’,
+			   but argument has type ‘long int’ [-Wformat=] */
+			/* fprintf(d, "!%d(%d)!", OP(*s), opnd); */
+			fprintf(d, "!%ld(%ld)!", OP(*s), opnd);
 			break;
 		}
 		if (!done)

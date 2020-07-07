@@ -16,7 +16,8 @@
 #include "utils.h"
 #include "regex2.h"
 
-static int nope = 0;		/* for use in asserts; shuts lint up */
+/* Prevent warning: ‘nope’ defined but not used [-Wunused-variable] */
+/* static int nope = 0; */     /* for use in asserts; shuts lint up */
 
 /* macros for manipulating states, small version */
 #define	states	unsigned
