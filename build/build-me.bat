@@ -1,5 +1,5 @@
 @setlocal
-@set DOINST=0
+@set DOINST=1
 @set TMPPRJ=regex
 @set TMPSRC=..
 @set TMPLOG=bldlog-1.txt
